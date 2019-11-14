@@ -1,0 +1,7 @@
+check-coverage: false
+nyc-arg:
+  - "--all"
+  - "--include=\"cjs/**\""
+  - "--include=\"!**/*.spec.js\""
+test-ignore: "(esm/.*|cjs/socket.spec.js)"
+coverage-map: "helpers/coverage-map.js"

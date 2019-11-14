@@ -1,0 +1,15 @@
+language: node_js
+
+# XXX Figure out how to install Asterisk 13 to travis
+jobs:
+  include:
+    - node_js: 13
+      env: TEST_TARGET=test-ci
+    - node_js: 12
+      env: TEST_TARGET=test-ci
+    - node_js: 10
+      env: TEST_TARGET=test-legacy-ci
+    - node_js: 8
+      env: TEST_TARGET=test-legacy-ci
+
+script: npm run $TEST_TARGET

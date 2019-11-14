@@ -1,0 +1,7 @@
+*.tgz
+node_modules
+coverage
+.nyc_output
+package
+fixtures/instance/
+cjs/

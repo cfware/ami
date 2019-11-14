@@ -1,0 +1,55 @@
+{
+	"name": "@cfware/ami",
+	"version": "0.1.0",
+	"description": "Astersik Manager Interface",
+	"scripts": {
+		"prepack": "babel esm --source-maps --out-dir cjs",
+		"release": "standard-version --sign",
+		"pretest": "xo && npm run prepack",
+		"test": "tap",
+		"test-legacy": "npm test -- --rcfile=.taprc-legacy",
+		"test-ci": "npm test -- --rcfile=.taprc-ci",
+		"test-legacy-ci": "npm test -- --rcfile=.taprc-legacy-ci",
+		"snap": "npm t -- --snapshot"
+	},
+	"main": "./index.js",
+	"engines": {
+		"node": ">=8"
+	},
+	"author": "Corey Farrell",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cfware/ami.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cfware/ami/issues"
+	},
+	"homepage": "https://github.com/cfware/ami#readme",
+	"dependencies": {
+		"uuid": "^3.3.3"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.7.0",
+		"@babel/core": "^7.7.2",
+		"@babel/plugin-proposal-class-properties": "^7.7.0",
+		"@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
+		"@babel/plugin-transform-modules-commonjs": "^7.7.0",
+		"@cfware/eslint-config-node": "^0.1.1",
+		"fast-glob": "^3.1.0",
+		"fromentries": "^1.2.0",
+		"make-dir": "^3.0.0",
+		"p-map": "^3.0.0",
+		"rimraf": "^3.0.0",
+		"standard-version": "^7.0.0",
+		"tap": "git://github.com/coreyfarrell/node-tap#nyc-15",
+		"which": "^2.0.1",
+		"xo": "^0.25.3"
+	},
+	"xo": {
+		"extends": "@cfware/eslint-config-node",
+		"rules": {
+			"promise/prefer-await-to-then": 0
+		}
+	}
+}

@@ -1,0 +1,15 @@
+*.tgz
+.esmrc.json
+.taprc*
+.travis.yml
+.nyc_output/
+fixtures/
+helpers/
+tap-snapshots/
+test/
+babel.config.js
+coverage-map.js
+*.map
+*.spec.js
+# Remove this once conditional exports are supported
+esm/
