@@ -13,3 +13,6 @@ jobs:
       env: TEST_TARGET=test-legacy-ci
 
 script: npm run $TEST_TARGET
+
+cache:
+  npm: false
