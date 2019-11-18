@@ -49,7 +49,9 @@ t.test('connect error', async t => {
 });
 
 t.test('basic session', async t => {
+	const events = [];
 	const socket = new Socket();
+	socket.on('event', packet => events.push(packet.asObject));
 
 	let ping1Done = false;
 	socket.ping().then(() => {
@@ -98,4 +100,17 @@ t.test('basic session', async t => {
 	t.is(socket.amiVersion, undefined);
 
 	await t.rejects(failPing, new Error('Disconnected'));
+	t.is(events.length, 2);
+	t.strictSame(events.filter(({event}) => event === 'FullyBooted')[0], {
+		event: 'FullyBooted',
+		privilege: 'system,all',
+		status: 'Fully Booted'
+	});
+	t.match(events.filter(({event}) => event === 'SuccessfulAuth')[0], {
+		event: 'SuccessfulAuth',
+		privilege: 'security,all',
+		severity: 'Informational',
+		service: 'AMI',
+		accountid: 'local'
+	});
 });

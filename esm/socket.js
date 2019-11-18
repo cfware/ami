@@ -178,14 +178,11 @@ export class Socket extends EventEmitter {
 			if (request.handleResponse(packet)) {
 				this.#connectionState.pending.delete(actionid);
 			}
-		}
-
-		if (event) {
+		} /* istanbul ignore else */ else if (event) {
 			this.emit('event', packet);
-			return;
+		} else {
+			this.emit('unknownPacket', packet);
 		}
-
-		this.emit('unknownPacket', packet);
 	}
 
 	_sendLogin() {
