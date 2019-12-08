@@ -1,0 +1,8 @@
+{
+	"type": "module",
+	"peerDependencies": {
+		"fromentries": "*",
+		"tap": "*",
+		"uuid": "*"
+	}
+}

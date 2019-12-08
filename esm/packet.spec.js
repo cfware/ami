@@ -1,8 +1,8 @@
-import {test} from 'tap';
+import t from 'tap';
 
 import {Packet} from './packet.js';
 
-test('constructor without text', async t => {
+t.test('constructor without text', async t => {
 	const packet = new Packet();
 	t.type(packet, Packet);
 	t.is(packet.toString(), '');
@@ -10,7 +10,7 @@ test('constructor without text', async t => {
 	t.strictSame(packet.value('action'), []);
 });
 
-test('constructor with text', async t => {
+t.test('constructor with text', async t => {
 	const packet = new Packet('Action: Originate\r\nChannel: Local/1234@default');
 	t.is(packet.toString(), 'action: Originate\r\nchannel: Local/1234@default\r\n\r\n');
 	t.strictSame(packet.values, [
@@ -57,7 +57,7 @@ test('constructor with text', async t => {
 	t.is(packet.asObject, obj);
 });
 
-test('constructor with object', async t => {
+t.test('constructor with object', async t => {
 	const packet = new Packet({
 		action: 'Originate',
 		variable: [
@@ -70,6 +70,6 @@ test('constructor with object', async t => {
 	t.is(packet.toString(), 'action: Originate\r\nvariable: NAME1=VALUE1\r\nvariable: NAME2=VALUE2\r\nvariable: NAME3=VALUE3\r\n\r\n');
 });
 
-test('constructor with invalid input', async t => {
+t.test('constructor with invalid input', async t => {
 	t.throws(() => (new Packet(true)), TypeError);
 });

@@ -1,6 +1,6 @@
 import {promisify} from 'util';
 
-import {test} from 'tap';
+import t from 'tap';
 
 import {Request} from './request.js';
 import {Packet} from './packet.js';
@@ -10,13 +10,13 @@ const delay = promisify(setTimeout);
 const matchActionID = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\d+$/;
 const matchActionIDIgnore = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}IGNORE$/;
 
-test('errors', async t => {
+t.test('errors', async t => {
 	t.throws(() => (new Request()), TypeError);
 	t.throws(() => (new Request(true)), TypeError);
 	t.throws(() => (new Request({})), TypeError);
 });
 
-test('basic', async t => {
+t.test('basic', async t => {
 	const fakeSocket = {
 		txt: [],
 		write(txt) {
@@ -78,7 +78,7 @@ function setupPromiseState(request) {
 	return state;
 }
 
-test('response success', async t => {
+t.test('response success', async t => {
 	const request = new Request({action: 'test'});
 	const state = setupPromiseState(request);
 	const response = new Packet({
@@ -91,7 +91,7 @@ test('response success', async t => {
 	t.strictSame(request.response, response.asObject);
 });
 
-test('response no status', async t => {
+t.test('response no status', async t => {
 	const request = new Request({action: 'test'});
 	const state = setupPromiseState(request);
 	request.handleResponse(new Packet({
@@ -102,7 +102,7 @@ test('response no status', async t => {
 	t.strictSame(state, {txt: 'resolved'});
 });
 
-test('response error', async t => {
+t.test('response error', async t => {
 	const request = new Request({action: 'test'});
 	const state = setupPromiseState(request);
 	request.handleResponse(new Packet({
@@ -117,7 +117,7 @@ test('response error', async t => {
 	t.is(state.error.request, request);
 });
 
-test('response list', async t => {
+t.test('response list', async t => {
 	const request = new Request({action: 'test'});
 	const {actionid} = request;
 	const state = setupPromiseState(request);
