@@ -10,6 +10,6 @@ test/
 babel.config.js
 coverage-map.js
 *.map
-*.spec.js
+*.test.js
 # Remove this once conditional exports are supported
 esm/

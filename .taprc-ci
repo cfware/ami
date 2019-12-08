@@ -6,6 +6,6 @@ node-arg:
 nyc-arg:
   - "--include=\"cjs/**\""
   - "--include=\"esm/**\""
-  - "--include=\"!**/*.spec.js\""
+  - "--include=\"!**/*.test.js\""
 coverage-map: "helpers/coverage-map.js"
-test-ignore: "(cjs|esm)/socket.spec.js"
+test-ignore: "(cjs|esm)/socket.test.js"
