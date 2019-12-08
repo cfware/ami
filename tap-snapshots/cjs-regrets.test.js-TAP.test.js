@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`cjs/regrets.spec.js TAP exports > must match snapshot 1`] = `
+exports[`cjs/regrets.test.js TAP exports > must match snapshot 1`] = `
 Object {
   "crlf": "RegExp(\\"/\\\\\\\\r?\\\\\\\\n/\\")",
   "crlf2x": "RegExp(\\"/\\\\\\\\r?\\\\\\\\n\\\\\\\\r?\\\\\\\\n/\\")",

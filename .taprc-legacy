@@ -1,3 +1,4 @@
+esm: false
 check-coverage: true
 nyc-arg:
   - "--all"
