@@ -1,4 +1,4 @@
-import {test} from 'tap';
+import t from 'tap';
 import fromEntries from 'fromentries';
 
 import * as regrets from './regrets.js';
@@ -12,7 +12,7 @@ function type(obj) {
 	return proto.constructor.name;
 }
 
-test('exports', async t => {
+t.test('exports', async t => {
 	t.matchSnapshot(
 		fromEntries(
 			Object.entries(regrets)

@@ -1,6 +1,9 @@
+esm: false
 check-coverage: false
+node-arg:
+  - "--no-warnings"
+  - "--experimental-modules"
 nyc-arg:
-  - "--all"
   - "--include=\"cjs/**\""
   - "--include=\"esm/**\""
   - "--include=\"!**/*.spec.js\""

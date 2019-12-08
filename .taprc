@@ -1,6 +1,9 @@
+esm: false
 check-coverage: true
+node-arg:
+  - "--no-warnings"
+  - "--experimental-modules"
 nyc-arg:
-  - "--all"
   - "--include=\"cjs/**\""
   - "--include=\"esm/**\""
 coverage-map: "helpers/coverage-map.js"

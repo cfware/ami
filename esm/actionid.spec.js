@@ -1,8 +1,8 @@
-import {test} from 'tap';
+import t from 'tap';
 
 import * as actionid from './actionid.js';
 
-test('basic', async t => {
+t.test('basic', async t => {
 	t.strictSame(Object.keys(actionid).sort(), ['actionAutoID', 'actionIgnore']);
 	t.type(actionid.actionIgnore, 'string');
 	t.type(actionid.actionAutoID, 'function');
