@@ -1,12 +1,11 @@
-import t from 'tap';
-import fromEntries from 'fromentries';
+import t from 'libtap';
 
-import * as regrets from './regrets.js';
+import * as regrets from '../lib/regrets.js';
 
-function type(obj) {
-	const proto = Object.getPrototypeOf(obj);
+function type(object) {
+	const proto = Object.getPrototypeOf(object);
 	if (!proto) {
-		return typeof obj;
+		return typeof object;
 	}
 
 	return proto.constructor.name;
@@ -14,7 +13,7 @@ function type(obj) {
 
 t.test('exports', async t => {
 	t.matchSnapshot(
-		fromEntries(
+		Object.fromEntries(
 			Object.entries(regrets)
 				.map(([name, value]) => [
 					name,

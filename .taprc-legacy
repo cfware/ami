@@ -1,9 +1,0 @@
-esm: false
-check-coverage: true
-nyc-arg:
-  - "--all"
-  - "--include=\"cjs/**\""
-test-ignore: "esm/.*"
-coverage-map: "helpers/coverage-map.js"
-before: "helpers/before.js"
-after: "helpers/after.js"

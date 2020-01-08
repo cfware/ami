@@ -10,7 +10,7 @@ Astersik Manager Interface
 
 ### Install @cfware/ami
 
-This module requires node.js 8 or above.
+This module requires node.js 13.2.0 or above and ES modules.
 
 ```sh
 npm install @cfware/ami
@@ -19,18 +19,7 @@ npm install @cfware/ami
 ## Usage
 
 ```js
-'use strict';
-
-require('@cfware/ami');
-```
-
-## Running tests
-
-Tests are provided by xo and tap.
-
-```sh
-npm install
-npm test
+import AMISocket from '@cfware/ami';
 ```
 
 [npm-image]: https://img.shields.io/npm/v/@cfware/ami.svg

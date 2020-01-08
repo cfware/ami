@@ -1,14 +1,15 @@
+/* eslint "promise/prefer-await-to-then": 0 */
 import {promisify} from 'util';
 
-import t from 'tap';
+import t from 'libtap';
 
-import {Request} from './request.js';
-import {Packet} from './packet.js';
+import {Request} from '../lib/request.js';
+import {Packet} from '../lib/packet.js';
 
 const delay = promisify(setTimeout);
 
-const matchActionID = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\d+$/;
-const matchActionIDIgnore = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}IGNORE$/;
+const matchActionID = /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}\d+$/u;
+const matchActionIDIgnore = /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}IGNORE$/u;
 
 t.test('errors', async t => {
 	t.throws(() => (new Request()), TypeError);
@@ -23,12 +24,12 @@ t.test('basic', async t => {
 			this.txt.push(txt);
 		}
 	};
-	const obj = {action: 'Test'};
+	const object = {action: 'Test'};
 
-	const autoID = new Request(obj);
-	const autoIDMatcher = new RegExp(`action: Test\r\nactionid: ${autoID.actionid}\r\n\r\n`);
+	const autoID = new Request(object);
+	const autoIDMatcher = new RegExp(`action: Test\r\nactionid: ${autoID.actionid}\r\n\r\n`, 'u');
 	t.match(autoID.actionid, matchActionID);
-	t.is(autoID.ignoreResponse, false);
+	t.equal(autoID.ignoreResponse, false);
 	t.match(autoID.toString(), autoIDMatcher);
 	t.strictSame(autoID.responses, []);
 	t.strictSame(autoID.response, undefined);
@@ -42,12 +43,12 @@ t.test('basic', async t => {
 		resolved = true;
 	});
 	await delay(1);
-	t.is(resolved, false);
+	t.equal(resolved, false);
 
-	const ignoreResponse = new Request(obj, {ignoreResponse: true});
-	const ignoreResponseMatcher = new RegExp(`action: Test\r\nactionid: ${ignoreResponse.actionid}\r\n\r\n`);
+	const ignoreResponse = new Request(object, {ignoreResponse: true});
+	const ignoreResponseMatcher = new RegExp(`action: Test\r\nactionid: ${ignoreResponse.actionid}\r\n\r\n`, 'u');
 	t.match(ignoreResponse.actionid, matchActionIDIgnore);
-	t.is(ignoreResponse.ignoreResponse, true);
+	t.equal(ignoreResponse.ignoreResponse, true);
 	t.match(ignoreResponse.toString(), ignoreResponseMatcher);
 	t.strictSame(ignoreResponse.responses, []);
 	t.strictSame(ignoreResponse.response, undefined);
@@ -61,7 +62,7 @@ t.test('basic', async t => {
 		resolved = true;
 	});
 	await delay(1);
-	t.is(resolved, true);
+	t.equal(resolved, true);
 });
 
 function setupPromiseState(request) {
@@ -114,7 +115,7 @@ t.test('response error', async t => {
 		txt: 'rejected',
 		error: Error
 	});
-	t.is(state.error.request, request);
+	t.equal(state.error.request, request);
 });
 
 t.test('response list', async t => {
@@ -141,10 +142,10 @@ t.test('response list', async t => {
 	request.handleResponse(new Packet({actionid, eventlist: 'Complete'}));
 	await delay(1);
 	t.strictSame(state, {txt: 'resolved'});
-	t.is(request.responsePackets.length, 4);
+	t.equal(request.responsePackets.length, 4);
 	t.strictSame(request.responsePackets.map(p => p.asObject), request.responses);
-	t.is(request.responses[0].eventlist, 'start');
-	t.is(request.responses[1].event, 'ListItem1');
-	t.is(request.responses[2].event, 'ListItem2');
-	t.is(request.responses[3].eventlist, 'Complete');
+	t.equal(request.responses[0].eventlist, 'start');
+	t.equal(request.responses[1].event, 'ListItem1');
+	t.equal(request.responses[2].event, 'ListItem2');
+	t.equal(request.responses[3].eventlist, 'Complete');
 });

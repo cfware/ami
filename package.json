@@ -3,18 +3,16 @@
 	"version": "0.1.0",
 	"description": "Astersik Manager Interface",
 	"scripts": {
-		"prepack": "babel esm --source-maps --delete-dir-on-start --out-dir cjs",
 		"release": "standard-version --sign",
-		"pretest": "xo && npm run prepack",
-		"test": "tap",
-		"test-legacy": "npm test -- --rcfile=.taprc-legacy",
-		"test-ci": "npm test -- --rcfile=.taprc-ci",
-		"test-legacy-ci": "npm test -- --rcfile=.taprc-legacy-ci",
-		"snap": "npm t -- --snapshot"
+		"pretest": "cfware-lint .",
+		"test": "c8 -r none node test.js|tap-yaml-summary",
+		"posttest": "c8 --all report",
+		"snap": "cross-env TAP_SNAPSHOT=1 npm test"
 	},
-	"main": "./index.js",
+	"type": "module",
+	"main": "lib/index.js",
 	"engines": {
-		"node": ">=8"
+		"node": ">=13.2"
 	},
 	"author": "Corey Farrell",
 	"license": "MIT",
@@ -30,26 +28,15 @@
 		"uuid": "^3.3.3"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.7.0",
-		"@babel/core": "^7.7.2",
-		"@babel/plugin-proposal-class-properties": "^7.7.0",
-		"@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
-		"@babel/plugin-transform-modules-commonjs": "^7.7.0",
-		"@cfware/eslint-config-node": "^0.1.1",
-		"fast-glob": "^3.1.0",
-		"fromentries": "^1.2.0",
-		"make-dir": "^3.0.0",
+		"@cfware/lint": "^1.0.1",
+		"c8": "^7.0.0",
+		"cross-env": "^6.0.3",
+		"glob": "^7.1.6",
+		"is-ci": "^2.0.0",
+		"libtap": "^0.1.0",
 		"p-map": "^3.0.0",
-		"rimraf": "^3.0.0",
 		"standard-version": "^7.0.0",
-		"tap": "git://github.com/coreyfarrell/node-tap#nyc-15",
-		"which": "^2.0.1",
-		"xo": "^0.25.3"
-	},
-	"xo": {
-		"extends": "@cfware/eslint-config-node",
-		"rules": {
-			"promise/prefer-await-to-then": 0
-		}
+		"tap-yaml-summary": "^0.1.0",
+		"which": "^2.0.1"
 	}
 }

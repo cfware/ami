@@ -1,16 +1,16 @@
 import {promisify} from 'util';
 
-import t from 'tap';
+import t from 'libtap';
 
-import {Socket} from './socket.js';
+import {Socket} from '../lib/socket.js';
 
 const delay = promisify(setTimeout);
 
 t.test('basic instance', async t => {
 	const socket = new Socket();
-	t.is(socket.connected, false);
-	t.is(socket.authenticated, false);
-	t.is(socket.amiVersion, undefined);
+	t.equal(socket.connected, false);
+	t.equal(socket.authenticated, false);
+	t.equal(socket.amiVersion, undefined);
 	socket.disconnect();
 });
 
@@ -54,31 +54,33 @@ t.test('basic session', async t => {
 	socket.on('event', packet => events.push(packet.asObject));
 
 	let ping1Done = false;
+	// eslint-disable-next-line promise/prefer-await-to-then
 	socket.ping().then(() => {
 		ping1Done = true;
 	});
 
 	let ping2Done = false;
+	// eslint-disable-next-line promise/prefer-await-to-then
 	socket.send({action: 'ping'}, {ignoreResponse: true}).then(() => {
 		ping2Done = true;
 	});
 
 	await socket.connect();
-	t.is(socket.authenticated, true);
-	t.is(socket.connected, true);
-	t.match(socket.amiVersion, /^\d+\.\d+\.\d+$/);
-	t.is(ping2Done, true);
+	t.equal(socket.authenticated, true);
+	t.equal(socket.connected, true);
+	t.match(socket.amiVersion, /^\d+\.\d+\.\d+$/u);
+	t.equal(ping2Done, true);
 
 	await delay(100);
-	t.is(ping1Done, true);
+	t.equal(ping1Done, true);
 
 	await t.rejects(socket.connect(), new Error('Disconnect first'));
 
 	const {ping} = await socket.send({action: 'ping'});
-	t.is(ping, 'Pong');
+	t.equal(ping, 'Pong');
 
 	const categories = await socket.getList({action: 'CoreShowChannels'});
-	t.is(categories.length, 2);
+	t.equal(categories.length, 2);
 	t.match(categories, [
 		{
 			response: 'Success',
@@ -95,12 +97,12 @@ t.test('basic session', async t => {
 	const failPing = socket.ping();
 	socket.disconnect();
 
-	t.is(socket.connected, false);
-	t.is(socket.authenticated, false);
-	t.is(socket.amiVersion, undefined);
+	t.equal(socket.connected, false);
+	t.equal(socket.authenticated, false);
+	t.equal(socket.amiVersion, undefined);
 
 	await t.rejects(failPing, new Error('Disconnected'));
-	t.is(events.length, 2);
+	t.equal(events.length, 2);
 	t.strictSame(events.filter(({event}) => event === 'FullyBooted')[0], {
 		event: 'FullyBooted',
 		privilege: 'system,all',
