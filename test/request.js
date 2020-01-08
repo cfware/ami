@@ -149,3 +149,68 @@ t.test('response list', async t => {
 	t.equal(request.responses[2].event, 'ListItem2');
 	t.equal(request.responses[3].eventlist, 'Complete');
 });
+
+t.test('originate sync success', async t => {
+	const request = new Request({action: 'Originate'});
+	const {actionid} = request;
+	const state = setupPromiseState(request);
+
+	const finalResponse = new Packet({actionid, response: 'Success'});
+	t.equal(request.handleResponse(finalResponse), true);
+	await delay(0);
+	t.strictSame(state, {txt: 'resolved'});
+
+	t.equal(request.responsePacket, finalResponse);
+});
+
+t.test('originate async immediate error', async t => {
+	const request = new Request({action: 'Originate'});
+	const {actionid} = request;
+	const state = setupPromiseState(request);
+
+	const finalResponse = new Packet({actionid, response: 'Error', message: 'async immediate error'});
+	t.equal(request.handleResponse(finalResponse), true);
+	await delay(0);
+	t.strictSame(state, {
+		txt: 'rejected',
+		error: Object.assign(new Error(finalResponse.asObject.message), {request})
+	});
+
+	t.equal(request.responsePacket, finalResponse);
+});
+
+t.test('originate async error', async t => {
+	const request = new Request({action: 'Originate', async: true});
+	const {actionid} = request;
+	const state = setupPromiseState(request);
+
+	t.equal(request.handleResponse(new Packet({actionid, response: 'Success'})), false);
+	await delay(0);
+	t.strictSame(state, {txt: 'pending'});
+
+	const finalResponse = new Packet({actionid, event: 'OriginateResponse', response: 'Failure'});
+	t.equal(request.handleResponse(finalResponse), true);
+	await delay(0);
+	t.strictSame(state, {
+		txt: 'rejected',
+		error: Object.assign(new Error('AMI action error'), {request})
+	});
+
+	t.equal(request.responsePacket, finalResponse);
+});
+
+t.test('originate async success', async t => {
+	const request = new Request({action: 'Originate', async: true});
+	const {actionid} = request;
+	const state = setupPromiseState(request);
+
+	t.equal(request.handleResponse(new Packet({actionid, response: 'Success'})), false);
+	await delay(0);
+	t.strictSame(state, {txt: 'pending'});
+
+	const finalResponse = new Packet({actionid, event: 'OriginateResponse', response: 'Success'});
+	t.equal(request.handleResponse(finalResponse), true);
+	await delay(0);
+	t.strictSame(state, {txt: 'resolved'});
+	t.equal(request.responsePacket, finalResponse);
+});
