@@ -173,7 +173,7 @@ t.test('originate async immediate error', async t => {
 	await delay(0);
 	t.strictSame(state, {
 		txt: 'rejected',
-		error: Object.assign(new Error(finalResponse.asObject.message), {request})
+		error: Object.assign(new Error(`Originate: ${finalResponse.asObject.message}`), {request})
 	});
 
 	t.equal(request.responsePacket, finalResponse);
@@ -193,7 +193,7 @@ t.test('originate async error', async t => {
 	await delay(0);
 	t.strictSame(state, {
 		txt: 'rejected',
-		error: Object.assign(new Error('AMI action error'), {request})
+		error: Object.assign(new Error('Originate: unknown error'), {request})
 	});
 
 	t.equal(request.responsePacket, finalResponse);
