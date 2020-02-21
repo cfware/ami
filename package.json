@@ -31,10 +31,10 @@
 	"devDependencies": {
 		"@cfware/lint": "^1.0.1",
 		"c8": "^7.0.0",
-		"cross-env": "^6.0.3",
+		"cross-env": "^7.0.0",
 		"glob": "^7.1.6",
 		"is-ci": "^2.0.0",
-		"libtap": "^0.1.0",
+		"libtap": "^0.2.0",
 		"p-map": "^3.0.0",
 		"standard-version": "^7.0.0",
 		"tap-yaml-summary": "^0.1.0",
