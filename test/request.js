@@ -8,8 +8,8 @@ import {Packet} from '../lib/packet.js';
 
 const delay = promisify(setTimeout);
 
-const matchActionID = /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}\d+$/u;
-const matchActionIDIgnore = /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}IGNORE$/u;
+const matchActionID = /^[\da-f]{32}\d+$/u;
+const matchActionIDIgnore = /^[\da-f]{32}IGNORE$/u;
 
 t.test('errors', async t => {
 	t.throws(() => (new Request()), TypeError);

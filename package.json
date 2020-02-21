@@ -25,9 +25,7 @@
 		"url": "https://github.com/cfware/ami/issues"
 	},
 	"homepage": "https://github.com/cfware/ami#readme",
-	"dependencies": {
-		"uuid": "^3.3.3"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@cfware/lint": "^1.0.1",
 		"c8": "^7.0.0",
