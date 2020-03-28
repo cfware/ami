@@ -1,5 +1,6 @@
 *.tgz
 node_modules
+.nyc_output
 coverage
 package
 fixtures/instance/

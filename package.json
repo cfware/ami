@@ -5,9 +5,9 @@
 	"scripts": {
 		"release": "standard-version --sign",
 		"pretest": "cfware-lint .",
-		"tests-only": "c8 -r none node test.js|tap-yaml-summary",
+		"tests-only": "cross-env NODE_OPTIONS='--experimental-loader @istanbuljs/esm-loader-hook' nyc --no-check-coverage -s node test.js|tap-yaml-summary",
 		"test": "npm run -s tests-only",
-		"posttest": "c8 --all report",
+		"posttest": "nyc report",
 		"snap": "cross-env TAP_SNAPSHOT=1 npm test"
 	},
 	"type": "module",
@@ -29,12 +29,14 @@
 	"dependencies": {},
 	"devDependencies": {
 		"@cfware/lint": "^1.0.1",
-		"c8": "^7.0.0",
+		"@cfware/nyc": "^0.6.0",
+		"@istanbuljs/esm-loader-hook": "^0.1.0",
 		"cross-env": "^7.0.0",
 		"glob": "^7.1.6",
 		"is-ci": "^2.0.0",
-		"libtap": "^0.2.0",
-		"p-map": "^3.0.0",
+		"libtap": "^0.3.0",
+		"nyc": "^15.0.0",
+		"p-map": "^4.0.0",
 		"standard-version": "^7.0.0",
 		"tap-yaml-summary": "^0.1.0",
 		"which": "^2.0.1"
