@@ -5,7 +5,8 @@
 	"scripts": {
 		"release": "standard-version --sign",
 		"pretest": "cfware-lint .",
-		"test": "c8 -r none node test.js|tap-yaml-summary",
+		"tests-only": "c8 -r none node test.js|tap-yaml-summary",
+		"test": "npm run -s tests-only",
 		"posttest": "c8 --all report",
 		"snap": "cross-env TAP_SNAPSHOT=1 npm test"
 	},
