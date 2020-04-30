@@ -10,7 +10,7 @@ Astersik Manager Interface
 
 ### Install @cfware/ami
 
-This module requires node.js 13.2.0 or above and ES modules.
+This module requires node.js 14.0.0 or above and ES modules.
 
 ```sh
 npm install @cfware/ami
