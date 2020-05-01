@@ -1,6 +1,6 @@
 {
-	"name": "@cfware/ami",
-	"version": "0.1.0",
+	"name": "ami",
+	"version": "1.0.0",
 	"description": "Astersik Manager Interface",
 	"scripts": {
 		"release": "standard-version --sign",

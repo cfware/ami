@@ -1,19 +1,19 @@
-# @cfware/ami [![NPM Version][npm-image]][npm-url]
+# ami [![NPM Version][npm-image]][npm-url]
 
 > Astersik Manager Interface
 
-## Install @cfware/ami
+## Install ami
 
 This module requires node.js 14.0.0 or above and ES modules.
 
 ```sh
-npm install @cfware/ami
+npm install ami
 ```
 
 ## class AMISocket
 
 ```js
-import AMISocket from '@cfware/ami';
+import AMISocket from 'ami';
 
 const ami = new AMISocket();
 ```
@@ -111,5 +111,5 @@ response, see [ASTERISK-27072](https://issues.asterisk.org/jira/browse/ASTERISK-
 This is used internally to produce the raw data.  It could also be used for debug output.
 Note that keys are already tranformed to lowercase.
 
-[npm-image]: https://img.shields.io/npm/v/@cfware/ami.svg
-[npm-url]: https://npmjs.org/package/@cfware/ami
+[npm-image]: https://img.shields.io/npm/v/ami.svg
+[npm-url]: https://npmjs.org/package/ami
