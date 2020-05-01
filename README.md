@@ -1,14 +1,8 @@
-# @cfware/ami
+# @cfware/ami [![NPM Version][npm-image]][npm-url]
 
-![Tests][tests-status]
-[![Greenkeeper badge][gk-image]](https://greenkeeper.io/)
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![MIT][license-image]](LICENSE)
+> Astersik Manager Interface
 
-Astersik Manager Interface
-
-### Install @cfware/ami
+## Install @cfware/ami
 
 This module requires node.js 14.0.0 or above and ES modules.
 
@@ -119,8 +113,3 @@ Note that keys are already tranformed to lowercase.
 
 [npm-image]: https://img.shields.io/npm/v/@cfware/ami.svg
 [npm-url]: https://npmjs.org/package/@cfware/ami
-[tests-status]: https://github.com/cfware/ami/workflows/Tests/badge.svg
-[gk-image]: https://badges.greenkeeper.io/cfware/ami.svg
-[downloads-image]: https://img.shields.io/npm/dm/@cfware/ami.svg
-[downloads-url]: https://npmjs.org/package/@cfware/ami
-[license-image]: https://img.shields.io/npm/l/@cfware/ami.svg
