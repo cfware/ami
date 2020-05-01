@@ -1,7 +1,8 @@
 import t from 'libtap';
 
 import {Socket} from '../lib/socket.js';
-import AMISocket from '../lib/index.js';
+// eslint-disable-next-line import/no-unresolved
+import AMISocket from '@cfware/ami';
 
 t.test('expected export', async t => {
 	t.equal(AMISocket, Socket);
