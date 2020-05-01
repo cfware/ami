@@ -108,8 +108,9 @@ An ordered array of name/value pairs, for example:
 ]
 ```
 
-This should not normally be needed, it is provided in case some odd AMI response contains
-values where the order between keys is significant.
+This is only needed to deal with responses which violate the AMI specification.  An example
+of this is the `app_queue` [QueueRule](https://github.com/asterisk/asterisk/blob/2e7866ebb7773fdd4f67e80f3747e41d84bcb93b/apps/app_queue.c#L9744-L9777)
+response, see [ASTERISK-27072](https://issues.asterisk.org/jira/browse/ASTERISK-27072).
 
 #### AMIPacket#toString()
 
