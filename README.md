@@ -2,14 +2,6 @@
 
 > Astersik Manager Interface
 
-## Install ami
-
-This module requires node.js 14.0.0 or above and ES modules.
-
-```sh
-npm install ami
-```
-
 ## class AMISocket
 
 ```js
